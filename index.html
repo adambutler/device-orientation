@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  	<title></title>
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+
+  	<meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <style type="text/css">
+
+      #compass span {
+        position: relative;
+        background: #ddd;
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        display: block;
+        border-radius: 200px;
+        text-align: center;
+        line-height: 200px;
+        -webkit-transform: rotate(0deg);
+      }
+
+      #compass span h2 {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin-top: -15px;
+      }
+
+      .max {
+        color: #ff0000;
+        font-weight: bold;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+      }
+
+      label {
+        background: #eee;
+        padding: 5px 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      input[type=range]{
+        width: 100%;
+        margin: 10px 0;
+      }
+    </style>
+
+  	<script src="js/libs/modernizr-2.5.3.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <section id="deviceOrientation" class="well">
+
+        <h1>Device Orientation</h1>
+        <label>alpha <span id="data-alpha-text">null</span></label>
+        <input type="range" min="0" max="360" id="data-alpha">
+
+        <label>beta <span id="data-beta-text">null</span></label>
+        <input type="range" min="-90" max="90" id="data-beta">
+
+        <label>gamma <span id="data-gamma-text">null</span></label>
+        <input type="range"  min="-180" max="180" id="data-gamma">
+      </section>
+
+      <section id="compass" class="well">
+        <h1>Device Orientation (heading)</h1>
+        <span id="data-compass-heading">
+          <h1>&uarr;</h1>
+          <h2 id="data-compass-heading-text">0&deg;</h2>
+        </span>
+      </section>
+
+      <section id="deviceOrientation" class="well">
+        <h1>Device Motion</h1>
+        <label>x <span id="data-x-text">null</span><span id="data-x-max-text" class="max pull-right">null</span></label>
+        <input type="range" min="0" max="30" id="data-x">
+
+        <label>y <span id="data-y-text">null</span><span id="data-y-max-text" class="max pull-right">null</span></label>
+        <input type="range" min="0" max="30" id="data-y">
+
+        <label>z <span id="data-z-text">null</span><span id="data-z-max-text" class="max pull-right">null</span></label>
+        <input type="range"  min="0" max="30" id="data-z">
+      </section>
+
+      <section id="deviceOrientation" class="well">
+        <h1>Device Motion + Gravity</h1>
+        <label>x <span id="data-gravX-text">null</span><span id="data-gravX-max-text" class="max pull-right">null</span></label>
+        <input type="range" min="0" max="30" id="data-gravX">
+
+        <label>y <span id="data-gravY-text">null</span><span id="data-gravY-max-text" class="max pull-right">null</span></label>
+        <input type="range" min="0" max="30" id="data-gravY">
+
+        <label>z <span id="data-gravZ-text">null</span><span id="data-gravZ-max-text" class="max pull-right">null</span></label>
+        <input type="range"  min="0" max="30" id="data-gravZ">
+      </section>
+
+    </div> <!-- /container -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+
+    <script type="text/javascript">
+
+      var maxX = 0,
+          maxY = 0,
+          maxZ = 0,
+          maxXGrav = 0,
+          maxYGrav = 0,
+          maxZGrav = 0;
+
+      window.ondeviceorientation = function(e) {
+
+        $('#data-alpha').val(e.alpha);
+        $('#data-alpha-text').html(Math.round(e.alpha*10)/10);
+
+        $('#data-beta').val(e.beta);
+        $('#data-beta-text').html(Math.round(e.beta*10)/10);
+
+        $('#data-gamma').val(e.gamma);
+        $('#data-gamma-text').html(Math.round(e.gamma*10)/10);
+
+        $('#data-compass-heading').css('-webkit-transform', 'rotate('+e.webkitCompassHeading+'deg)')
+        $('#data-compass-heading-text').html((Math.round(e.webkitCompassHeading*10)/10)+'&deg;');
+
+      }
+
+    </script>
+
+  </body>
+</html>
